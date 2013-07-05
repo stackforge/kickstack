@@ -23,7 +23,15 @@ class kickstack (
   $rabbit_user   = $kickstack::params::rabbit_user,
   $rabbit_virtual_host = $kickstack::params::rabbit_virtual_host,
   $qpid_username   = $kickstack::params::qpid_username,
+  $keystone_region = $kickstack::params::keystone_region,
+  $keystone_public_suffix = $kickstack::params::keystone_public_suffix,
+  $keystone_admin_suffix = $kickstack::params::keystone_admin_suffix,
+  $keystone_admin_tenant = $kickstack::params::keystone_admin_tenant,
+  $keystone_service_tenant = $kickstack::params::keystone_service_tenant,
+  $keystone_admin_email = $kickstack::params::keystone_admin_email,
+  $keystone_admin_password = $kickstack::params::keystone_admin_password,
 ) inherits kickstack::params {
 
   include exportfact
+  include openstack::repo
 } 

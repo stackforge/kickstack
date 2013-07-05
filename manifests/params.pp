@@ -49,4 +49,28 @@ class kickstack::params {
   # Qpid password:
   $qpid_password = getvar("::${variable_prefix}qpid_password")
 
+  # The Keystone region to manage
+  $keystone_region = pick(getvar("::${variable_prefix}keystone_region"), 'kickstack')
+
+  # The suffix to append to the keystone hostname for publishing
+  # the public service endpoint
+  $keystone_public_suffix = getvar("::${variable_prefix}keystone_public_suffix")
+
+  # The suffix to append to the keystone hostname for publishing
+  # the admin service endpoint
+  $keystone_admin_suffix = getvar("::${variable_prefix}keystone_admin_suffix")
+
+  # The tenant set up so that individual OpenStack services can
+  # authenticate with Keystone
+  $keystone_service_tenant = getvar("::${variable_prefix}keystone_service_tenant")
+
+  # The special tenant set up for administrative purposes
+  $keystone_admin_tenant = getvar("::${variable_prefix}keystone_admin_tenant")
+
+  # The email address set for the admin user
+  $keystone_admin_email = pick(getvar("::${variable_prefix}keystone_admin_email"),"admin@${hostname}")
+
+  # The initial password to set for the admin user
+  $keystone_admin_password = pick(getvar("::${variable_prefix}keystone_admin_password"),"kickstack")
+
 }
