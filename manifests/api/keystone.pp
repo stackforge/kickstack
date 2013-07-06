@@ -17,21 +17,6 @@ class kickstack::api::keystone inherits kickstack {
     require => Class['::keystone']
   }
 
-  # Installs the service user endpoint.
-  class { '::keystone::endpoint':
-    public_address   => "${hostname}${keystone_public_suffix}",
-    admin_address    => "${hostname}${keystone_admin_suffix}",
-    internal_address => $hostname,
-    region           => $keystone_region,
-    require      => Class['::keystone']
-  }
-
-  kickstack::exportfact::export { "keystone_internal_address":
-    value => "${hostname}",
-    tag => "keystone",
-    require => Class['::keystone::endpoint']
-  }
-
   # Adds the admin credential to keystone.
   class { '::keystone::roles::admin':
     email        => $keystone_admin_email,
