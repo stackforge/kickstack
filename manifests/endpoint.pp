@@ -1,4 +1,4 @@
-define kickstack::endpoints::service {
+define kickstack::endpoint {
 
   include pwgen
 
@@ -13,8 +13,8 @@ define kickstack::endpoints::service {
   # Installs the service user endpoint.
   class { "${classname}":
     password         => "$service_password",
-    public_address   => "${hostname}${keystone_public_suffix}",
-    admin_address    => "${hostname}${keystone_admin_suffix}",
+    public_address   => "${hostname}${::kickstack::keystone_public_suffix}",
+    admin_address    => "${hostname}${::kickstack::keystone_admin_suffix}",
     internal_address => "$hostname",
     region           => "$::kickstack::keystone_region",
     require          => Class['::keystone'],
