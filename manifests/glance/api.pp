@@ -6,6 +6,7 @@ class kickstack::glance::api inherits kickstack {
   # Keystone accordingly. If no fact has been set, generate a password.
   $service_password = getvar("${fact_prefix}glance_keystone_password")
   $sql_conn = getvar("${fact_prefix}glance_sql_connection")
+  $reg_host = getvar("${fact_prefix}glance_registry_host")
 
   class { '::glance::api':
     verbose           => $kickstack::verbose,
@@ -14,6 +15,7 @@ class kickstack::glance::api inherits kickstack {
     keystone_user     => 'glance',
     keystone_password => $service_password,
     sql_connection    => $sql_conn,
+    registry_host     => $reg_host,
   }
 
 }

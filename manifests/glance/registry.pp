@@ -15,4 +15,12 @@ class kickstack::glance::registry inherits kickstack {
     keystone_password => "$service_password",
     sql_connection    => "$sql_conn",
   }
+
+  # Export the registry host name string for the service
+  kickstack::exportfact::export { "glance_registry_host":
+    value => "${hostname}",
+    tag => "glance",
+    require => Class['::glance::registry']
+  }
+
 }
