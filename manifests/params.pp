@@ -68,7 +68,7 @@ class kickstack::params {
 
   # The tenant set up so that individual OpenStack services can
   # authenticate with Keystone
-  $keystone_service_tenant = getvar("::${variable_prefix}keystone_service_tenant")
+  $keystone_service_tenant = pick(getvar("::${variable_prefix}keystone_service_tenant"),"services")
 
   # The special tenant set up for administrative purposes
   $keystone_admin_tenant = getvar("::${variable_prefix}keystone_admin_tenant")
