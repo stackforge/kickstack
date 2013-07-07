@@ -1,4 +1,4 @@
-class kickstack::db inherits kickstack {
+class kickstack::database inherits kickstack {
 
   case $database {
     'mysql': {
