@@ -12,6 +12,12 @@ class kickstack::params {
   # * override by setting "kickstack_fact_category"
   $fact_category = pick(getvar("::${variable_prefix}fact_category"), "kickstack")
 
+  # Enables verbose logging globally 
+  $verbose = str2bool(pick(getvar("::${variable_prefix}verbose"), 'false'))
+
+  # Enables debug logging globally
+  $debug = str2bool(pick(getvar("::${variable_prefix}debug"), 'false'))
+
   # The database backend type:
   # * default "mysql"
   # * override by setting "kickstack_database"

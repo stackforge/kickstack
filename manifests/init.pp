@@ -18,6 +18,8 @@
 class kickstack ( 
   $fact_prefix   = $kickstack::params::fact_prefix,
   $fact_filename = $kickstack::params::fact_filename,
+  $verbose       = $kickstack::params::verbose,
+  $debug         = $kickstack::params::debug,
   $database      = $kickstack::params::database,
   $rpc           = $kickstack::params::rpc,
   $rabbit_user   = $kickstack::params::rabbit_user,
