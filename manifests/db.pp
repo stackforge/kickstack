@@ -1,4 +1,4 @@
-define kickstack::db::service {
+define kickstack::db {
 
   include pwgen
 
