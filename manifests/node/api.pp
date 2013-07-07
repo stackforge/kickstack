@@ -5,4 +5,6 @@ class kickstack::node::api inherits kickstack {
 
   include kickstack::glance::api
   include kickstack::glance::endpoint
+
+  include kickstack::cinder::api
 }
