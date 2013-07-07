@@ -9,6 +9,7 @@ class kickstack::node::controller inherits kickstack {
   include kickstack::glance::registry
   
   include kickstack::cinder::db
+  include kickstack::cinder::scheduler
 
   include kickstack::nova::db
 }
