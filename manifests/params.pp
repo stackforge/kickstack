@@ -41,19 +41,16 @@ class kickstack::params {
   $rpc = pick(getvar("::${variable_prefix}rpc"), 'rabbitmq')
 
   # RabbitMQ user name:
-  $rabbit_user = getvar("::${variable_prefix}rabbit_user")
-
-  # RabbitMQ password:
-  $rabbit_password = getvar("::${variable_prefix}rabbit_password")
+  $rabbit_userid = pick(getvar("::${variable_prefix}rabbit_userid"),'guest')
 
   # RabbitMQ virtual host
-  $rabbit_virtual_host = getvar("::${variable_prefix}rabbit_virtual_host")
+  $rabbit_virtual_host = pick(getvar("::${variable_prefix}rabbit_virtual_host"),'/')
 
   # Qpid user name:
-  $qpid_username = getvar("::${variable_prefix}qpid_username")
+  $qpid_username = pick(getvar("::${variable_prefix}qpid_username"),'guest')
 
-  # Qpid password:
-  $qpid_password = getvar("::${variable_prefix}qpid_password")
+  # Qpid realm:
+  $qpid_realm = getvar("::${variable_prefix}qpid_realm")
 
   # The Keystone region to manage
   $keystone_region = pick(getvar("::${variable_prefix}keystone_region"), 'kickstack')
