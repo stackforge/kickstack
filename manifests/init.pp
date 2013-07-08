@@ -43,6 +43,9 @@ class kickstack (
   $quantum_tenant_network_type = $kickstack::params::quantum_tenant_network_type,
   $quantum_network_vlan_ranges = $kickstack::params::quantum_network_vlan_ranges,
   $quantum_tunnel_id_ranges = $kickstack::params::quantum_tunnel_id_ranges,
+  $nic_management = $kickstack::params::nic_management,
+  $nic_data = $kickstack::params::nic_data,
+  $nic_external = $kickstack::params::nic_external
 ) inherits kickstack::params {
 
   include exportfact

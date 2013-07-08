@@ -114,4 +114,17 @@ class kickstack::params {
 
   # The tunnel ID ranges to use with the Quantum ovs plugin, when in gre mode
   $quantum_tunnel_id_ranges = pick(getvar("::${variable_prefix}quantum_tunnel_id_ranges"),"1:1000")
+
+  # The interface over which to run your nodes' management network traffic.
+  # Normally, this would be your primary network interface.
+  $nic_management = pick(getvar("::${variable_prefix}nic_management"),"eth0")
+
+  # The interface over which to run your tenant guest traffic.
+  # This would be a secondary interface, present on your network node and compute nodes.
+  $nic_data = pick(getvar("::${variable_prefix}nic_data"),"eth1")
+
+  # The interface you use to connect to the public network.
+  # This interface would only be present on your network nodes, and possibly also
+  # on your API nodes if you wish to expose the API services publicly.
+  $nic_external = pick(getvar("::${variable_prefix}nic_external"),"eth2")
 }
