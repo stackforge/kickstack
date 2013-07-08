@@ -127,4 +127,8 @@ class kickstack::params {
   # This interface would only be present on your network nodes, and possibly also
   # on your API nodes if you wish to expose the API services publicly.
   $nic_external = pick(getvar("::${variable_prefix}nic_external"),"eth2")
+
+  $quantum_router_id = getvar("::${variable_prefix}quantum_router_id")
+
+  $quantum_gateway_external_network_id = getvar("::${variable_prefix}gateway_external_network_id")
 }
