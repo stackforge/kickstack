@@ -40,6 +40,9 @@ class kickstack (
   $cinder_rbd_user = $kickstack::params::cinder_rbd_user,
   $quantum_network_type = $kickstack::params::quantum_network_type,
   $quantum_plugin = $kickstack::params::quantum_plugin,
+  $quantum_tenant_network_type = $kickstack::params::quantum_tenant_network_type,
+  $quantum_network_vlan_ranges = $kickstack::params::quantum_network_vlan_ranges,
+  $quantum_tunnel_id_ranges = $kickstack::params::quantum_tunnel_id_ranges,
 ) inherits kickstack::params {
 
   include exportfact

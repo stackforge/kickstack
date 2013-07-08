@@ -104,4 +104,14 @@ class kickstack::params {
   # linuxbridge
   # ovs (default)
   $quantum_plugin = pick(getvar("::${variable_prefix}quantum_plugin"),"ovs")
+
+  # The tenant network type to use with the Quantum ovs and linuxbridge plugins
+  # Supported: vlan (default), gre
+  $quantum_tenant_network_type = pick(getvar("::${variable_prefix}quantum_tenant_network_type"),"vlan")
+
+  # The network VLAN ranges to use with the Quantum ovs and linuxbridge plugins
+  $quantum_network_vlan_ranges = pick(getvar("::${variable_prefix}quantum_network_vlan_ranges"),"default:2000:3999")
+
+  # The tunnel ID ranges to use with the Quantum ovs plugin, when in gre mode
+  $quantum_tunnel_id_ranges = pick(getvar("::${variable_prefix}quantum_tunnel_id_ranges"),"1:1000")
 }
