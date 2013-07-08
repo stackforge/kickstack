@@ -76,4 +76,18 @@ class kickstack::params {
   # The initial password to set for the admin user
   $keystone_admin_password = pick(getvar("::${variable_prefix}keystone_admin_password"),"kickstack")
 
+  # The backend to use with Cinder. Supported: iscsi (default), rbd
+  $cinder_backend = pick(getvar("::${variable_prefix}cinder_backend"),"iscsi")
+
+  # The device to create the LVM physical volume on. Ignored unless $cinder_backend==iscsi.
+  $cinder_lvm_pv = pick(getvar("::${variable_prefix}cinder_lvm_pv"),"/dev/disk/by-partlabel/cinder-volumes")
+
+  # The LVM volume group name to use for volumes. Ignored unless $cinder_backend==iscsi.
+  $cinder_lvm_vg = pick(getvar("::${variable_prefix}cinder_lvm_vg"),"cinder-volumes")
+
+  # The RADOS pool to use for volumes. Ignored unless $cinder_backend==rbd.
+  $cinder_rbd_pool = pick(getvar("::${variable_prefix}cinder_rbd_pool"),"cinder-volumes")
+
+  # The RADOS user to use for volumes. Ignored unless $cinder_backend==rbd.
+  $cinder_rbd_user = pick(getvar("::${variable_prefix}cinder_rbd_pool"),"cinder")
 }
