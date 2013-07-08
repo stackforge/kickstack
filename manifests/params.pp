@@ -90,4 +90,18 @@ class kickstack::params {
 
   # The RADOS user to use for volumes. Ignored unless $cinder_backend==rbd.
   $cinder_rbd_user = pick(getvar("::${variable_prefix}cinder_rbd_pool"),"cinder")
+
+  # The network type to configure for Quantum.
+  # See http://docs.openstack.org/grizzly/openstack-network/admin/content/use_cases.html
+  # Supported:
+  # single-flat (default)
+  # provider-router
+  # per-tenant-router
+  $quantum_network_type = pick(getvar("::${variable_prefix}quantum_network_type"),"single-flat")
+
+  # The plugin to use with Quantum.
+  # Supported:
+  # linuxbridge
+  # ovs (default)
+  $quantum_plugin = pick(getvar("::${variable_prefix}quantum_plugin"),"ovs")
 }

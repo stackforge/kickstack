@@ -38,6 +38,8 @@ class kickstack (
   $cinder_lvm_vg = $kickstack::params::cinder_lvm_vg,
   $cinder_rbd_pool = $kickstack::params::cinder_rbd_pool,
   $cinder_rbd_user = $kickstack::params::cinder_rbd_user,
+  $quantum_network_type = $kickstack::params::quantum_network_type,
+  $quantum_plugin = $kickstack::params::quantum_plugin,
 ) inherits kickstack::params {
 
   include exportfact
