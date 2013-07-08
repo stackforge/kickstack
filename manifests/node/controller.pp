@@ -11,5 +11,7 @@ class kickstack::node::controller inherits kickstack {
   include kickstack::cinder::db
   include kickstack::cinder::scheduler
 
+  include kickstack::quantum::db
+
   include kickstack::nova::db
 }
