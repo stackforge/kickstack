@@ -17,11 +17,12 @@ class kickstack::nova::api inherits kickstack {
   }
 
   class { '::nova::api':
+    enabled           => true,
     auth_strategy     => 'keystone',
     auth_host         => $auth_host,
     admin_tenant_name => $kickstack::keystone_service_tenant,
     admin_user        => 'nova',
-    admin_password    => $service_password,
+    admin_password    => $admin_password,
     enabled_apis      => 'ec2,osapi_compute,metadata',
     quantum_metadata_proxy_shared_secret => $secret
   }
