@@ -1,9 +1,8 @@
 class kickstack::quantum::agent::metadata inherits kickstack {
 
   include kickstack::quantum::config
-  include pwgen
 
-  $secret = pick(getvar("${fact_prefix}quantum_metadata_shared_secret"),pwgen())
+  $secret = getvar("${fact_prefix}quantum_metadata_shared_secret")
 
   $service_password = getvar("${fact_prefix}quantum_keystone_password")
   $metadata_ip = getvar("${fact_prefix}nova_metadata_ip")
