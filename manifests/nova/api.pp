@@ -9,6 +9,13 @@ class kickstack::nova::api inherits kickstack {
   $auth_host = getvar("${fact_prefix}keystone_internal_address")
   $secret = pick(getvar("${fact_prefix}quantum_metadata_shared_secret"),pwgen())
 
+  # Stupid hack: Grizzly packages in Ubuntu Cloud Archive
+  # require python-eventlet > 0.9, but the python-nova
+  # package in UCA does not reflect this
+  package { 'python-eventlet':
+    ensure => latest
+  }
+
   class { '::nova::api':
     auth_strategy     => 'keystone',
     auth_host         => $auth_host,
