@@ -2,8 +2,7 @@ class kickstack::glance::api inherits kickstack {
 
   include kickstack::glance::config
 
-  # Grab the Keystone admin token from a kickstack fact and configure
-  # Keystone accordingly. If no fact has been set, generate a password.
+  $auth_host = getvar("${fact_prefix}keystone_internal_address")
   $service_password = getvar("${fact_prefix}glance_keystone_password")
   $sql_conn = getvar("${fact_prefix}glance_sql_connection")
   $reg_host = getvar("${fact_prefix}glance_registry_host")
@@ -11,6 +10,8 @@ class kickstack::glance::api inherits kickstack {
   class { '::glance::api':
     verbose           => $kickstack::verbose,
     debug             => $kickstack::debug,
+    auth_type         => 'keystone',
+    auth_host         => $auth_host,
     keystone_tenant   => $kickstack::keystone_service_tenant,
     keystone_user     => 'glance',
     keystone_password => $service_password,
