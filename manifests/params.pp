@@ -131,4 +131,22 @@ class kickstack::params {
   $quantum_router_id = getvar("::${variable_prefix}quantum_router_id")
 
   $quantum_gateway_external_network_id = getvar("::${variable_prefix}gateway_external_network_id")
+
+  # The nova-compute backend driver.
+  # Supported: libvirt (default), xenserver
+  $nova_compute_driver = pick(getvar("::${variable_prefix}nova_compute_driver"),'libvirt')
+
+  # The hypervisor to use with libvirt (ignored unless nova_compute_driver==libvirt)
+  # Supported: kvm (default), qemu
+  $nova_compute_libvirt_type = pick(getvar("::${variable_prefix}nova_compute_libvirt_type"),'kvm')
+
+  # The XenAPI connection URL (ignored unless nova_compute_driver==xenserver)
+  $xenapi_connection_url = getvar("::${variable_prefix}xenapi_connection_url")
+
+  # The XenAPI user name (ignored unless nova_compute_driver==xenserver)
+  $xenapi_connection_username = getvar("::${variable_prefix}xenapi_connection_username")
+
+  # The XenAPI password (ignored unless nova_compute_driver==xenserver)
+  $xenapi_connection_password = getvar("::${variable_prefix}xenapi_connection_password")
+
 }

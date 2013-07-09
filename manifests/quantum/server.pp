@@ -12,4 +12,10 @@ class kickstack::quantum::server inherits kickstack {
     auth_host => $keystone_internal_address
   }
 
+  kickstack::exportfact::export { "quantum_host":
+    value => "${hostname}",
+    tag => 'quantum',
+    require => Class['::quantum::server']
+  }
+
 }
