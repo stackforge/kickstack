@@ -19,6 +19,7 @@ class kickstack::quantum::agent::l3 inherits kickstack {
     gateway_external_network_id => $::kickstack::quantum_network_type ? {
                           'provider-router' => "$::kickstack::quantum_gateway_external_network_id",
                           default => undef
-                        }
+                        },
+    require => Class['kickstack::quantum::agent::metadata']
   }
 }
