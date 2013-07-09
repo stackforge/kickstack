@@ -11,4 +11,6 @@ class kickstack::node::api inherits kickstack {
   include kickstack::quantum::server
   include kickstack::quantum::endpoint
   include kickstack::quantum::plugin
+
+  include kickstack::nova::api
 }
