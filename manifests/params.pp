@@ -12,6 +12,11 @@ class kickstack::params {
   # * override by setting "kickstack_fact_category"
   $fact_category = pick(getvar("::${variable_prefix}fact_category"), "kickstack")
 
+  # The strategy to use so machines can make their hostnames known to
+  # each other.
+  # * default "hosts" -- manage /etc/hosts
+  $name_resolution = pick(getvar("::${variable_prefix}name_resolution"),"hosts")
+
   # Enables verbose logging globally 
   $verbose = str2bool(pick(getvar("::${variable_prefix}verbose"), 'false'))
 

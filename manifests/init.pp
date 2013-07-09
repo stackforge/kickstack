@@ -18,6 +18,7 @@
 class kickstack ( 
   $fact_prefix   = $kickstack::params::fact_prefix,
   $fact_filename = $kickstack::params::fact_filename,
+  $name_resolution = $kickstack::params::name_resolution,
   $verbose       = $kickstack::params::verbose,
   $debug         = $kickstack::params::debug,
   $database      = $kickstack::params::database,
@@ -57,4 +58,5 @@ class kickstack (
 
   include exportfact
   include openstack::repo
+  include kickstack::nameresolution
 } 
