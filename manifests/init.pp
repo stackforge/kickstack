@@ -59,4 +59,6 @@ class kickstack (
   include exportfact
   include openstack::repo
   include kickstack::nameresolution
+
+  ::exportfact::import { $fact_category: }
 } 
