@@ -33,7 +33,8 @@ define kickstack::db {
             user => "$username",
             password => "$sql_password",
             charset => "utf8",
-            allowed_hosts => '%'
+            allowed_hosts => '%',
+            notify => Kickstack::Exportfact::Export["${name}_sql_connection"]
       }
     }
     default: {
