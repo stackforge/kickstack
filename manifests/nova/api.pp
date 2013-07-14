@@ -3,11 +3,11 @@ class kickstack::nova::api inherits kickstack {
   include kickstack::nova::config
   include pwgen
 
-  # Grab the Keystone admin token from a kickstack fact and configure
+  # Grab the Keystone admin password from a kickstack fact and configure
   # Keystone accordingly. If no fact has been set, generate a password.
-  $admin_password = getvar("${fact_prefix}nova_keystone_password")
+  $admin_password = pick(getvar("${fact_prefix}nova_keystone_password"),pwgen())
   $auth_host = getvar("${fact_prefix}keystone_internal_address")
-  $secret = pick(getvar("${fact_prefix}quantum_metadata_shared_secret"),pwgen())
+  $quantum_secret = pick(getvar("${fact_prefix}quantum_metadata_shared_secret"),pwgen())
 
   # Stupid hack: Grizzly packages in Ubuntu Cloud Archive
   # require python-eventlet > 0.9, but the python-nova
@@ -24,7 +24,12 @@ class kickstack::nova::api inherits kickstack {
     admin_user        => 'nova',
     admin_password    => $admin_password,
     enabled_apis      => 'ec2,osapi_compute,metadata',
-    quantum_metadata_proxy_shared_secret => $secret
+    quantum_metadata_proxy_shared_secret => $quantum_secret
+  }
+
+  kickstack::endpoint { 'nova':
+    service_password => $admin_password,
+    require           => Class['::nova::api']
   }
 
   # Export the metadata API IP address and shared secret, to be picked up

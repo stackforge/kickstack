@@ -1,4 +1,4 @@
-define kickstack::endpoint {
+define kickstack::endpoint ( $service_password ) {
 
   include pwgen
 
@@ -6,16 +6,12 @@ define kickstack::endpoint {
   $factname = "${servicename}_keystone_password"
   $classname = "${servicename}::keystone::auth"
 
-  # Grab the service's keystone user password from a kickstack fact and configure
-  # Keystone accordingly. If no fact has been set, generate a password.
-  $service_password = pick(getvar("${::kickstack::fact_prefix}${factname}"),pwgen())
-
   # Installs the service user endpoint.
   class { "${classname}":
-    password         => "$service_password",
+    password         => $service_password,
     public_address   => "${hostname}${::kickstack::keystone_public_suffix}",
     admin_address    => "${hostname}${::kickstack::keystone_admin_suffix}",
-    internal_address => "$hostname",
+    internal_address => $hostname,
     region           => "$::kickstack::keystone_region",
     require          => Class['::keystone'],
   }

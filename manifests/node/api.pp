@@ -1,10 +1,39 @@
 class kickstack::node::api inherits kickstack {
-  include kickstack::glance::api
 
-  include kickstack::cinder::api
+  $keystone_internal_address = getvar("${fact_prefix}keystone_internal_address")
+  $glance_sql_conn = getvar("${fact_prefix}glance_sql_connection")
+  $cinder_sql_conn = getvar("${fact_prefix}cinder_sql_connection")
+  $quantum_sql_conn = getvar("${fact_prefix}quantum_sql_connection")
+  $nova_sql_conn = getvar("${fact_prefix}nova_sql_connection")
+  
 
-  include kickstack::quantum::server
-  include kickstack::quantum::plugin
+  case $::kickstack::rpc {
+    'rabbitmq': {
+      $amqp_host = getvar("${::kickstack::fact_prefix}rabbit_host")
+      $amqp_password = getvar("${::kickstack::fact_prefix}rabbit_password")
+    }
+    'qpid': {
+      $amqp_host = getvar("${::kickstack::fact_prefix}qpid_host")
+      $amqp_password = getvar("${::kickstack::fact_prefix}qpid_password")
+    }
+  }
 
-  include kickstack::nova::api
+  if $keystone_internal_address and $glance_sql_conn {
+    include kickstack::glance::api
+  }
+
+  if $keystone_internal_address and $cinder_sql_conn and $amqp_host and $amqp_password {
+    include kickstack::cinder::api
+  }
+
+  if $keystone_internal_address and $amqp_host and $amqp_password {
+    include kickstack::quantum::server
+    if $quantum_sql_conn {
+      include kickstack::quantum::plugin
+    }
+  }
+
+  if $keystone_internal_address and $nova_sql_conn and $amqp_host and $amqp_password {
+    include kickstack::nova::api
+  }
 }
