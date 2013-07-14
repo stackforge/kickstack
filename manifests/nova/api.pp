@@ -40,7 +40,7 @@ class kickstack::nova::api inherits kickstack {
     require => Class['::nova::api']
   }
   kickstack::exportfact::export { "quantum_metadata_shared_secret":
-    value => $secret,
+    value => $quantum_secret,
     tag => 'nova',
     require => Class['::nova::api']
   }
