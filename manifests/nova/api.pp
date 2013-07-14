@@ -27,12 +27,16 @@ class kickstack::nova::api inherits kickstack {
     quantum_metadata_proxy_shared_secret => $secret
   }
 
-  # Export the metadata API IP address to be picked up
+  # Export the metadata API IP address and shared secret, to be picked up
   # by the Quantum metadata proxy agent on the network node
   kickstack::exportfact::export { "nova_metadata_ip":
     value => getvar("ipaddress_${nic_management}"),
     tag => "nova",
     require => Class['::nova::api']
   }
-
+  kickstack::exportfact::export { "quantum_metadata_shared_secret":
+    value => $secret,
+    tag => 'nova',
+    require => Class['::nova::api']
+  }
 }
