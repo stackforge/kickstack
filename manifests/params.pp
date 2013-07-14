@@ -46,13 +46,13 @@ class kickstack::params {
   $rpc = pick(getvar("::${variable_prefix}rpc"), 'rabbitmq')
 
   # RabbitMQ user name:
-  $rabbit_userid = pick(getvar("::${variable_prefix}rabbit_userid"),'guest')
+  $rabbit_userid = pick(getvar("::${variable_prefix}rabbit_userid"),'kickstack')
 
   # RabbitMQ virtual host
   $rabbit_virtual_host = pick(getvar("::${variable_prefix}rabbit_virtual_host"),'/')
 
   # Qpid user name:
-  $qpid_username = pick(getvar("::${variable_prefix}qpid_username"),'guest')
+  $qpid_username = pick(getvar("::${variable_prefix}qpid_username"),'kickstack')
 
   # Qpid realm:
   $qpid_realm = getvar("::${variable_prefix}qpid_realm")
