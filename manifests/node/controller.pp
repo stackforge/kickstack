@@ -7,6 +7,8 @@ class kickstack::node::controller inherits kickstack {
   $cinder_keystone_password = getvar("${fact_prefix}cinder_keystone_password")
   $nova_sql_conn = getvar("${fact_prefix}nova_sql_connection")
   $nova_keystone_password = getvar("${fact_prefix}nova_keystone_password")
+  $quantum_sql_conn = getvar("${fact_prefix}quantum_sql_connection")
+  $quantum_keystone_password = getvar("${fact_prefix}quantum_keystone_password")
 
   case $::kickstack::rpc {
     'rabbitmq': {
@@ -34,5 +36,15 @@ class kickstack::node::controller inherits kickstack {
       include kickstack::nova::objectstore
       include kickstack::nova::scheduler
     }
+  }
+
+  # Including the Quantum L2 plugin _agent_ on
+  # the controller node makes no sense at all.
+  # Unfortunately though, the Quantum Puppet
+  # modules are wired in such a way that they
+  # require this. Until that is fixed, pull the
+  # L2 agent into the controller.
+  if $quantum_sql_conn and $quantum_keystone_password {
+    include kickstack::quantum::agent::l2
   }
 }
