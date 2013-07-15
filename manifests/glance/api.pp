@@ -24,4 +24,10 @@ class kickstack::glance::api inherits kickstack {
     service_password => $service_password,
     require          => Class['::glance::api']
   }
+
+  kickstack::exportfact::export { 'glance_api_host':
+    value => $hostname,
+    tag => 'glance',
+    require => Class['::glance::api']
+  }
 }

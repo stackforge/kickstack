@@ -1,6 +1,7 @@
 class kickstack::nova::config inherits kickstack {
 
   $sql_conn = getvar("${fact_prefix}nova_sql_connection")
+  $glance_api_servers = getvar("${fact_prefix}glance_api_host")
 
   case "$::kickstack::rpc" {
     'rabbitmq': {
@@ -17,7 +18,7 @@ class kickstack::nova::config inherits kickstack {
         auth_strategy   => 'keystone',
         verbose         => $::kickstack::verbose,
         debug           => $::kickstack::debug,
-        glance_api_servers => false
+        glance_api_servers => "${glance_api_servers}:9292"
       }
     }
     'qpid': {
@@ -34,7 +35,7 @@ class kickstack::nova::config inherits kickstack {
         auth_strategy   => 'keystone',
         verbose         => $::kickstack::verbose,
         debug           => $::kickstack::debug,
-        glance_api_servers => false
+        glance_api_servers => "${glance_api_servers}:9292"
       }
     }
   } 
