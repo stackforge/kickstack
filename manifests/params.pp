@@ -111,13 +111,18 @@ class kickstack::params {
   $quantum_plugin = pick(getvar("::${variable_prefix}quantum_plugin"),"ovs")
 
   # The tenant network type to use with the Quantum ovs and linuxbridge plugins
-  # Supported: vlan (default), gre
-  $quantum_tenant_network_type = pick(getvar("::${variable_prefix}quantum_tenant_network_type"),"vlan")
+  # Supported: flat (default), vlan, gre
+  $quantum_tenant_network_type = pick(getvar("::${variable_prefix}quantum_tenant_network_type"),'vlan')
+
+  # The Quantum physical network name to define
+  $quantum_physnet = pick(getvar("::${variable_prefix}quantum_physnet"),'physnet1')
 
   # The network VLAN ranges to use with the Quantum ovs and linuxbridge plugins
-  $quantum_network_vlan_ranges = pick(getvar("::${variable_prefix}quantum_network_vlan_ranges"),"default:2000:3999")
+  # (ignored unless quantum_tenant_network_type == 'vlan')
+  $quantum_network_vlan_ranges = pick(getvar("::${variable_prefix}quantum_network_vlan_ranges"),"2000:3999")
 
   # The tunnel ID ranges to use with the Quantum ovs plugin, when in gre mode
+  # (ignored unless quantum_tenant_network_type == 'gre')
   $quantum_tunnel_id_ranges = pick(getvar("::${variable_prefix}quantum_tunnel_id_ranges"),"1:1000")
 
   # The interface over which to run your nodes' management network traffic.

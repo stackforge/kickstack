@@ -5,12 +5,12 @@ class kickstack::quantum::plugin inherits kickstack {
   $sql_conn = getvar("${fact_prefix}quantum_sql_connection")
   $tenant_network_type = "$::kickstack::quantum_tenant_network_type"
   $network_vlan_ranges = $tenant_network_type ? {
-    'vlan' => "$::kickstack::quantum_network_vlan_ranges",
-    'gre' => ''
+    'gre' => '',
+    default => "${::kickstack::quantum_physnet}:${::kickstack::quantum_network_vlan_ranges}",
   }
   $tunnel_id_ranges = $tenant_network_type ? {
-    'vlan' => '',
-    'gre' => "$::kickstack::quantum_tunnel_id_ranges"
+    'gre' => $::kickstack::quantum_tunnel_id_ranges,
+    default => '',
   }
 
   case "$::kickstack::quantum_plugin" {

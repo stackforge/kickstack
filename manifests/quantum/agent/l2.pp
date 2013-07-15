@@ -16,9 +16,9 @@ class kickstack::quantum::agent::l2 inherits kickstack {
             tunnel_bridge      => 'br-tun',
           }
         }
-        'vlan': {
+        default: {
           class { 'quantum::agents::ovs':
-            bridge_mappings    => ["default:br-${nic_data}"],
+            bridge_mappings    => ["${::kickstack::quantum_physnet}:br-${nic_data}"],
             bridge_uplinks     => ["br-${nic_data}:${nic_data}"],
             integration_bridge => 'br-int',
             enable_tunneling   => false,
