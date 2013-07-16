@@ -150,8 +150,10 @@ class kickstack::params {
   # on your API nodes if you wish to expose the API services publicly.
   $nic_external = pick(getvar("::${variable_prefix}nic_external"),"eth2")
 
+  # The Quantum router uuid (irrelevant unless $quantum_network_type=='provider_router')
   $quantum_router_id = getvar("::${variable_prefix}quantum_router_id")
 
+  # The Quantum external network uuid (irrelevant unless $quantum_network_type=='provider_router')
   $quantum_gateway_external_network_id = getvar("::${variable_prefix}gateway_external_network_id")
 
   # The nova-compute backend driver.
