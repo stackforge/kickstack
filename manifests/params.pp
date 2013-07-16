@@ -125,6 +125,18 @@ class kickstack::params {
   # (ignored unless quantum_tenant_network_type == 'gre')
   $quantum_tunnel_id_ranges = pick(getvar("::${variable_prefix}quantum_tunnel_id_ranges"),"1:1000")
 
+  # The Quantum integration bridge
+  # Default: br-int (normally doesn't need to be changed)
+  $quantum_integration_bridge = pick(getvar("::${variable_prefix}quantum_integration_bridge"),'br-int')
+
+  # The Quantum tunnel bridge (irrelevant unless $quantum_tenant_network_type=='gre')
+  # Default: br-tun (normally doesn't need to be changed)
+  $quantum_tunnel_bridge = pick(getvar("::${variable_prefix}quantum_tunnel_bridge"),'br-tun')
+
+  # The Quantum external bridge
+  # Default: br-ex (normally doesn't need to be changed)
+  $quantum_external_bridge = pick(getvar("::${variable_prefix}quantum_external_bridge"),'br-ex')
+
   # The interface over which to run your nodes' management network traffic.
   # Normally, this would be your primary network interface.
   $nic_management = pick(getvar("::${variable_prefix}nic_management"),"eth0")
