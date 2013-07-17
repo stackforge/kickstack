@@ -73,7 +73,7 @@ class kickstack::params {
   $keystone_service_tenant = pick(getvar("::${variable_prefix}keystone_service_tenant"),"services")
 
   # The special tenant set up for administrative purposes
-  $keystone_admin_tenant = getvar("::${variable_prefix}keystone_admin_tenant")
+  $keystone_admin_tenant = pick(getvar("::${variable_prefix}keystone_admin_tenant"),'openstack')
 
   # The email address set for the admin user
   $keystone_admin_email = pick(getvar("::${variable_prefix}keystone_admin_email"),"admin@${hostname}")
