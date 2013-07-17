@@ -1,8 +1,9 @@
 class kickstack::keystone::api inherits kickstack {
-  # Grab the Keystone admin token from a kickstack fact and configure
-  # Keystone accordingly. If no fact has been set, generate a password.
-  $admin_token = pick(getvar("${fact_prefix}keystone_admin_token"),pwgen())
+  include pwgen  
 
+  $admin_token = pick(getvar("${fact_prefix}keystone_admin_token"),pwgen())
+  $admin_password = pick(getvar("${fact_prefix}keystone_admin_password"),pwgen())
+  $admin_tenant = $::kickstack::keystone_admin_tenant
   $sql_conn = getvar("${fact_prefix}keystone_sql_connection")
 
   class { '::keystone':
@@ -38,9 +39,24 @@ class kickstack::keystone::api inherits kickstack {
   # Adds the admin credential to keystone.
   class { '::keystone::roles::admin':
     email        => $kickstack::keystone_admin_email,
-    password     => $kickstack::keystone_admin_password,
-    admin_tenant => $kickstack::keystone_admin_tenant,
+    password     => $admin_password,
+    admin_tenant => $admin_tenant,
     service_tenant => $kickstack::keystone_service_tenant,
     require      => Class['::keystone::endpoint']
   }
+
+  file { '/root/openstackrc':
+    owner => root,
+    group => root,
+    mode => '0640',
+    content => template('kickstack/openstackrc.erb'),
+    require => Class['::keystone::roles::admin']
+  }
+
+  kickstack::exportfact::export { "keystone_admin_password":
+    value => $keystone_admin_password,
+    tag => "keystone",
+    require => Class['::keystone::roles::admin']
+  }
+
 }
