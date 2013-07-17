@@ -17,10 +17,14 @@ class kickstack::quantum::agent::l2 inherits kickstack {
           }
         }
         default: {
+          $bridge_uplinks = ["br-${nic_data}:${nic_data}"]
+          unless $kickstack::quantum_network_type == 'single-flat' {
+            $bridge_uplinks += ["${::kickstack::quantum_external_bridge}:${nic_external}"]
+          }
           class { 'quantum::agents::ovs':
             bridge_mappings    => ["${::kickstack::quantum_physnet}:br-${nic_data}"],
-            bridge_uplinks     => ["br-${nic_data}:${nic_data}","${::kickstack::quantum_external_bridge}:${nic_external}"],
-            integration_bridge => $::kickstack::quantum_integation_bridge,
+            bridge_uplinks     => $bridge_uplinks,
+            integration_bridge => $::kickstack::quantum_integration_bridge,
             enable_tunneling   => false,
             local_ip           => '',
           }
