@@ -21,7 +21,9 @@ class kickstack::node::network inherits kickstack {
 
   if $amqp_host and $amqp_password and $quantum_keystone_password {
     include kickstack::quantum::agent::dhcp
-    include kickstack::quantum::agent::l3
+    unless $::kickstack::quantum_network_type == 'single-flat' {
+      include kickstack::quantum::agent::l3
+    }
     if $quantum_sql_conn {
       include kickstack::quantum::agent::l2
     }
