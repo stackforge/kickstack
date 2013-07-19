@@ -9,7 +9,10 @@ class kickstack::quantum::agent::l2 inherits kickstack {
       case $tenant_network_type {
         'gre': {
           $local_tunnel_ip = getvar("ipaddress_${nic_data}")
+          $bridge_uplinks = ["${::kickstack::quantum_external_bridge}:${nic_external}"]
           class { 'quantum::agents::ovs':
+            bridge_mappings    => [],
+            bridge_uplinks     => $bridge_uplinks,
             integration_bridge => $::kickstack::quantum_integration_bridge,
             enable_tunneling   => true,
             local_ip           => $local_tunnel_ip,
