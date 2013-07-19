@@ -21,6 +21,12 @@ class kickstack::quantum::plugin inherits kickstack {
         network_vlan_ranges => $network_vlan_ranges,
         tunnel_id_ranges => $tunnel_id_ranges
       }
+      # This needs to be set for the plugin, not the agent
+      # (the latter is what the Quantum module assumes)
+      quantum_plugin_ovs { 'SECURITYGROUP/firewall_driver':
+        value => 'quantum.agent.linux.iptables_firewall.OVSHybridIptablesFirewallDriver',
+        require => Class['quantum::plugins::ovs']
+      }
     }
     'linuxbridge': {
       class { "quantum::plugins::linuxbridge":
