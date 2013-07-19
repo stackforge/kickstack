@@ -31,14 +31,4 @@ class kickstack::nova::compute inherits kickstack {
     }
   }
 
-  class { '::nova::network::quantum':
-    quantum_admin_password    => $quantum_admin_password,
-    quantum_auth_strategy     => 'keystone',
-    quantum_url               => "http://${quantum_host}:9696",
-    quantum_admin_tenant_name => "$::kickstack::keystone_service_tenant",
-    quantum_region_name       => "$::kickstack::keystone_region",
-    quantum_admin_username    => 'quantum',
-    quantum_admin_auth_url    => "http://${keystone_internal_address}:35357/v2.0",
-    security_group_api        => 'quantum',
-  }
 }
