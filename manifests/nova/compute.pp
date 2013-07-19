@@ -6,11 +6,12 @@ class kickstack::nova::compute inherits kickstack {
   $quantum_admin_password = getvar("${fact_prefix}quantum_keystone_password")
   $quantum_host = getvar("${fact_prefix}quantum_host")
   $vncproxy_host = getvar("${fact_prefix}vncproxy_host")
+  $vncserver_listen_address = getvar("ipaddress_${::kickstack::nic_management}")
 
   class { '::nova::compute':
     enabled                       => true,
     vnc_enabled                   => true,
-    vncserver_proxyclient_address => getvar("ipaddress_${::kickstack::nic_management}"),
+    vncserver_proxyclient_address => $vncserver_listen_address),
     vncproxy_host                 => $vncproxy_host,
     virtio_nic                    => true,
   }
@@ -19,7 +20,7 @@ class kickstack::nova::compute inherits kickstack {
     'libvirt': {
       class { '::nova::compute::libvirt':
         libvirt_type => "$::kickstack::nova_compute_libvirt_type",
-        vncserver_listen => '0.0.0.0'
+        vncserver_listen => $vncserver_listen_address
       }
     }
     'xenserver': {
