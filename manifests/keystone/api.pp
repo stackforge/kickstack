@@ -7,7 +7,7 @@ class kickstack::keystone::api inherits kickstack {
   $sql_conn = getvar("${fact_prefix}keystone_sql_connection")
 
   class { '::keystone':
-    package_ensure => 'latest',
+    package_ensure => $::kickstack::package_ensure,
     verbose        => $kickstack::verbose,
     debug          => $kickstack::debug,
     catalog_type   => 'sql',

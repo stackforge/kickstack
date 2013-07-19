@@ -12,6 +12,12 @@ class kickstack::params {
   # * override by setting "kickstack_fact_category"
   $fact_category = pick(getvar("::${variable_prefix}fact_category"), "kickstack")
 
+  # Whether or not we want to keep OpenStack packages at the latest versions
+  # * default 'installed'
+  # * override by setting to 'latest'
+  # Does not apply to packages outside OpenStack.
+  $package_ensure = pick(getvar("::${variable_prefix}package_ensure"), 'installed')
+
   # The strategy to use so machines can make their hostnames known to
   # each other.
   # * default "hosts" -- manage /etc/hosts

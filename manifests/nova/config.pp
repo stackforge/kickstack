@@ -8,7 +8,7 @@ class kickstack::nova::config inherits kickstack {
       $rabbit_host = getvar("${::kickstack::fact_prefix}rabbit_host")
       $rabbit_password = getvar("${fact_prefix}rabbit_password")
       class { '::nova':
-        ensure_package  => 'latest',
+        ensure_package  => $::kickstack::package_ensure,
         sql_connection  => $sql_conn,
         rpc_backend     => 'nova.openstack.common.rpc.impl_kombu',
         rabbit_host     => $rabbit_host,
@@ -25,7 +25,7 @@ class kickstack::nova::config inherits kickstack {
       $qpid_hostname = getvar("${::kickstack::fact_prefix}qpid_hostname")
       $qpid_password = getvar("${fact_prefix}qpid_password")
       class { '::nova':
-        ensure_package  => 'latest',
+        ensure_package  => $::kickstack::package_ensure,
         sql_connection  => $sql_conn,
         rpc_backend     => 'nova.openstack.common.rpc.impl_qpid',
         qpid_hostname   => $qpid_hostname,
