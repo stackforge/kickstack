@@ -37,7 +37,7 @@ class kickstack::horizon inherits kickstack {
 
   unless $secret_key == $new_secret_key {
     kickstack::exportfact::export { 'horizon_secret_key':
-      value => $secret_key,
+      value => $new_secret_key,
       tag => "horizon",
       require => Class['::horizon']
     }
