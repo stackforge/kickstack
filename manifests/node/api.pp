@@ -35,5 +35,13 @@ class kickstack::node::api inherits kickstack {
 
   if $keystone_internal_address and $nova_sql_conn and $amqp_host and $amqp_password {
     include kickstack::nova::api
+
+    # This looks a bit silly, but is currently necessary: in order to configure nova-api
+    # as a Quantum client, we first need to install nova-api and quantum-server in one
+    # run, and then fix up Nova with the Quantum configuration in the next run.
+    $quantum_keystone_password = getvar("${::kickstack::fact_prefix}quantum_keystone_password")
+    if $quantum_keystone_password {
+      include kickstack::nova::quantumclient
+    }
   }
 }
