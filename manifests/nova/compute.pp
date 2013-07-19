@@ -11,7 +11,7 @@ class kickstack::nova::compute inherits kickstack {
   class { '::nova::compute':
     enabled                       => true,
     vnc_enabled                   => true,
-    vncserver_proxyclient_address => $vncserver_listen_address),
+    vncserver_proxyclient_address => $vncserver_listen_address,
     vncproxy_host                 => $vncproxy_host,
     virtio_nic                    => true,
   }
