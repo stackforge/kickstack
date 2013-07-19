@@ -54,7 +54,7 @@ class kickstack::keystone::api inherits kickstack {
   }
 
   kickstack::exportfact::export { "keystone_admin_password":
-    value => $keystone_admin_password,
+    value => $admin_password,
     tag => "keystone",
     require => Class['::keystone::roles::admin']
   }
