@@ -45,6 +45,6 @@ class kickstack::node::controller inherits kickstack {
   # require this. Until that is fixed, pull the
   # L2 agent into the controller.
   if $quantum_sql_conn and $quantum_keystone_password {
-    include kickstack::quantum::agent::l2
+    include kickstack::quantum::agent::l2::compute
   }
 }

@@ -23,7 +23,7 @@ class kickstack::node::network inherits kickstack {
     include kickstack::quantum::agent::dhcp
     include kickstack::quantum::agent::l3
     if $quantum_sql_conn {
-      include kickstack::quantum::agent::l2
+      include kickstack::quantum::agent::l2::network
     }
     if $quantum_metadata_shared_secret {
       include kickstack::quantum::agent::metadata
