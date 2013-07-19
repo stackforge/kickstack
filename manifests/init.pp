@@ -61,7 +61,7 @@ class kickstack (
   $xenapi_connection_password = $kickstack::params::xenapi_connection_password
 ) inherits kickstack::params {
 
-  include exportfact
+  include ::exportfact
   include openstack::repo
   include kickstack::nameresolution
 
