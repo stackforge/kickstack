@@ -4,7 +4,7 @@ class kickstack::nameresolution inherits kickstack {
     'hosts': {
 
       @@host { "$hostname":
-        ip => $ipaddress,
+        ip => getvar("ipaddress_${::kickstack::nic_management}"),
         comment => "Managed by Puppet",
         tag => "hostname"
       }
