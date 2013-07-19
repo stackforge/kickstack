@@ -38,13 +38,4 @@ class kickstack::node::controller inherits kickstack {
     }
   }
 
-  # Including the Quantum L2 plugin _agent_ on
-  # the controller node makes no sense at all.
-  # Unfortunately though, the Quantum Puppet
-  # modules are wired in such a way that they
-  # require this. Until that is fixed, pull the
-  # L2 agent into the controller.
-  if $quantum_sql_conn and $quantum_keystone_password {
-    include kickstack::quantum::agent::l2::compute
-  }
 }
