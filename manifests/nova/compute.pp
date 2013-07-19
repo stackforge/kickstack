@@ -19,6 +19,7 @@ class kickstack::nova::compute inherits kickstack {
     'libvirt': {
       class { '::nova::compute::libvirt':
         libvirt_type => "$::kickstack::nova_compute_libvirt_type",
+        vncserver_listen => '0.0.0.0'
       }
     }
     'xenserver': {
