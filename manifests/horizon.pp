@@ -1,7 +1,8 @@
 class kickstack::horizon inherits kickstack {
 
   $keystone_host = getvar("${fact_prefix}keystone_internal_address")
-  $secret_key = pick(getvar("${fact_prefix}horizon_secret_key"),pwgen())
+  $secret_key = getvar("${fact_prefix}horizon_secret_key")
+  $new_secret_key = pick($secret_key,pwgen())
 
   package { 'memcached':
     ensure => installed;
@@ -20,7 +21,7 @@ class kickstack::horizon inherits kickstack {
 
   class { '::horizon':
     require               => Package['memcached'],
-    secret_key            => $secret_key,
+    secret_key            => $new_secret_key,
     cache_server_ip       => '127.0.0.1',
     cache_server_port     => '11211',
     swift                 => false,
@@ -34,10 +35,12 @@ class kickstack::horizon inherits kickstack {
     listen_ssl            => false;
   }
 
-  kickstack::exportfact::export { 'horizon_secret_key':
-    value => $secret_key,
-    tag => "horizon",
-    require => Class['::horizon']
+  unless $secret_key == $new_secret_key {
+    kickstack::exportfact::export { 'horizon_secret_key':
+      value => $secret_key,
+      tag => "horizon",
+      require => Class['::horizon']
+    }
   }
 }
 
