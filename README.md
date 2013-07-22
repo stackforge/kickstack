@@ -60,3 +60,52 @@ classes. Likewise, you can tweak your configuration by setting any of
 the global variables that Kickstack understands (which, by default,
 are all prefixed with `kickstack_` so they do not collide with other
 global variables that are already in your configuration).
+
+### Using Kickstack without an ENC
+
+If you _do not_ run an ENC, then your Kickstack configuration goes
+into standard Puppet manifests like `site.pp` and `nodes.pp`. A
+Kickstack-enabled small OpenStack cloud with a handful of nodes might
+look like this:
+
+```puppet
+node alice {
+  include kickstack::node::infrastructure
+  include kickstack::node::auth
+  include kickstack::node::controller
+  include kickstack::node::api
+  include kickstack::node::storage
+  include kickstack::node::dashboard
+}
+
+node bob {
+  include kickstack::node::network
+}
+
+node default {
+  include kickstack::node::compute
+}
+```
+
+In this configuration, your node `alice` is your controller and API
+node that also hosts your database, AMQP server and dashboard, `bob`
+is your network node, and all other nodes are compute nodes.
+
+Modifying your configuration is achieved through the use of global
+variables prefixed with `kickstack_`. For example, you might want to
+use Apache Qpid instead of the default RabbitMQ as your AMQP server:
+
+```puppet
+
+kickstack_rpc = 'qpid'
+
+node alice {
+  include kickstack::node::infrastructure
+  include kickstack::node::auth
+  # ... continued as above
+```
+
+Note that this approach is not very scalable and perhaps not the most
+user-friendly, but it does give you the opportunity to keep all of
+your Kickstack-related configuration in a single set of (hopefully
+version-controlled) plain text files.
