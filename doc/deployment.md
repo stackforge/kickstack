@@ -4,7 +4,7 @@ You have several options:
 
 - Using straightforward text-based Puppet configuration, using
   configuration files like `site.pp` and `nodes.pp`.
-- Trough a user interface that operates as a Puppet External Node
+- Through a user interface that operates as a Puppet External Node
   Classifier (ENC) and can assign nodes to classes. Examples for such
   ENCs are the
   [Puppet Dashboard](https://puppetlabs.com/puppet/related-projects/dashboard/),
@@ -19,6 +19,18 @@ classes. Likewise, you can tweak your configuration by setting any of
 the global variables that Kickstack understands (which, by default,
 are all prefixed with `kickstack_` so they do not collide with other
 global variables that are already in your configuration).
+
+**Eeeek! Global variables? Really?** Relax. All Kickstack classes
+inherit from a common base class, [`kickstack`](../manifests/init.pp),
+which is a perfectly normal parameterized class. It is just that the
+default values of the parameters of that class can be set with global
+variables,
+[falling back to reasonable defaults if the global variable is undefined](../manifests/params.pp). That
+enables Kickstack to just `include` all of its classes, making their
+use very simple, while still retaining the ability to configure
+everything to your needs. If you don't like the global variables
+approach, that's perfectly fine, you can still use Kickstack's classes
+directly and set the parameters within your class declarations.
 
 ## Using Kickstack without an ENC
 
