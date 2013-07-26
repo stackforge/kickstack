@@ -105,10 +105,10 @@ class kickstack::params {
   # The network type to configure for Quantum.
   # See http://docs.openstack.org/grizzly/openstack-network/admin/content/use_cases.html
   # Supported:
-  # single-flat (default)
+  # single-flat
   # provider-router
-  # per-tenant-router
-  $quantum_network_type = pick(getvar("::${variable_prefix}quantum_network_type"),"single-flat")
+  # per-tenant-router (default)
+  $quantum_network_type = pick(getvar("::${variable_prefix}quantum_network_type"),"per-tenant-router")
 
   # The plugin to use with Quantum.
   # Supported:
