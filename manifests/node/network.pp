@@ -13,6 +13,9 @@ class kickstack::node::network inherits kickstack {
       $amqp_host = getvar("${::kickstack::fact_prefix}qpid_host")
       $amqp_password = getvar("${::kickstack::fact_prefix}qpid_password")
     }
+    default: {
+      fail("Unsupported value for \$::kickstack::rpc: $::kickstack::rpc")
+    }
   }
 
   $quantum_sql_conn = getvar("${::kickstack::fact_prefix}quantum_sql_connection")
