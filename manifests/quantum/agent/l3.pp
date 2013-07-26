@@ -25,6 +25,6 @@ class kickstack::quantum::agent::l3 inherits kickstack {
                           'provider-router' => "$::kickstack::quantum_gateway_external_network_id",
                           default => undef
                         },
-    require => Class['kickstack::quantum::agent::metadata','vswitch::bridge']
+    require => Class['vswitch::bridge']
   }
 }
