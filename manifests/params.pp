@@ -117,8 +117,8 @@ class kickstack::params {
   $quantum_plugin = pick(getvar("::${variable_prefix}quantum_plugin"),"ovs")
 
   # The tenant network type to use with the Quantum ovs and linuxbridge plugins
-  # Supported: flat (default), vlan, gre
-  $quantum_tenant_network_type = pick(getvar("::${variable_prefix}quantum_tenant_network_type"),'vlan')
+  # Supported: gre (default), flat, vlan
+  $quantum_tenant_network_type = pick(getvar("::${variable_prefix}quantum_tenant_network_type"),'gre')
 
   # The Quantum physical network name to define
   $quantum_physnet = pick(getvar("::${variable_prefix}quantum_physnet"),'physnet1')
