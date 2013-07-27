@@ -15,7 +15,7 @@
 #     each other.
 #   fact_filename - The name of the file (relative to facter/facts.d)
 #     where kickstack stores its custom facts.
-class kickstack ( 
+class kickstack (
   $fact_prefix   = $kickstack::params::fact_prefix,
   $fact_filename = $kickstack::params::fact_filename,
   $fact_category = $kickstack::params::fact_category,
@@ -55,7 +55,7 @@ class kickstack (
   $nic_external = $kickstack::params::nic_external,
   $quantum_router_id = $kickstack::params::quantum_router_id,
   $quantum_gateway_external_network_id = $kickstack::params::quantum_gateway_external_network_id,
-  $nova_compute_driver = $kickstack::params::nova_compute_driver, 
+  $nova_compute_driver = $kickstack::params::nova_compute_driver,
   $nova_compute_libvirt_type = $kickstack::params::nova_compute_libvirt_type,
   $xenapi_connection_url = $kickstack::params::xenapi_connection_url,
   $xenapi_connection_username = $kickstack::params::xenapi_connection_username,
@@ -66,5 +66,5 @@ class kickstack (
   include openstack::repo
   include kickstack::nameresolution
 
-  ::exportfact::import { "$fact_category": }
-} 
+  ::exportfact::import { $fact_category: }
+}
