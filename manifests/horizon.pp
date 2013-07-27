@@ -1,7 +1,7 @@
 class kickstack::horizon inherits kickstack {
 
-  $keystone_host = getvar("${fact_prefix}keystone_internal_address")
-  $secret_key = getvar("${fact_prefix}horizon_secret_key")
+  $keystone_host = getvar("${::kickstack::fact_prefix}keystone_internal_address")
+  $secret_key = getvar("${::kickstack::fact_prefix}horizon_secret_key")
   $new_secret_key = pick($secret_key,pwgen())
 
   package { 'memcached':
@@ -26,7 +26,7 @@ class kickstack::horizon inherits kickstack {
     cache_server_port     => '11211',
     swift                 => false,
     quantum               => true,
-    keystone_host         => "$keystone_host",
+    keystone_host         => $keystone_host,
     keystone_default_role => 'Member',
     django_debug          => $django_debug,
     api_result_limit      => 1000,
@@ -38,7 +38,7 @@ class kickstack::horizon inherits kickstack {
   unless $secret_key == $new_secret_key {
     kickstack::exportfact::export { 'horizon_secret_key':
       value => $new_secret_key,
-      tag => "horizon",
+      tag => 'horizon',
       require => Class['::horizon']
     }
   }
