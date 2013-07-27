@@ -15,9 +15,9 @@ define kickstack::db {
   $sql_password = $sql_connection ? {
                   undef => pwgen(),
                   default => pick(regsubst(getvar("${fact_prefix}${servicename}_sql_connection"),
-                                           ".*://${username}:(.*)@.*/${servicename}",
-                                           '\1'),
-                                  pwgen())
+                    ".*://${username}:(.*)@.*/${servicename}",
+                    '\1'),
+                    pwgen())
                   }
 
   # Export facts about the database only after configuring the database
@@ -28,18 +28,18 @@ define kickstack::db {
   # If running on mysql, set the "allowed_hosts" parameter to % so we
   # can connect to the database from anywhere.
   case "${database}" {
-    "mysql": {
+    'mysql': {
       class { "${servicename}::db::mysql":
-            user => "$username",
-            password => "$sql_password",
-            charset => "utf8",
-            allowed_hosts => '%',
-            notify => Kickstack::Exportfact::Export["${name}_sql_connection"]
+        user => $username,
+        password => $sql_password,
+        charset => 'utf8',
+        allowed_hosts => '%',
+        notify => Kickstack::Exportfact::Export["${name}_sql_connection"]
       }
     }
     default: {
       class { "${name}::db::${database}":
-            password => "$sql_password"
+        password => $sql_password
       }
     }
   }
