@@ -3,7 +3,7 @@ define kickstack::client {
   $servicename = $name
   $classname = "::${servicename}::client"
 
-  class { "${classname}":
+  class { ${classname}:
   }
 
 }
