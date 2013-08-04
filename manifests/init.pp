@@ -35,7 +35,6 @@ class kickstack (
   $keystone_admin_tenant = $kickstack::params::keystone_admin_tenant,
   $keystone_service_tenant = $kickstack::params::keystone_service_tenant,
   $keystone_admin_email = $kickstack::params::keystone_admin_email,
-  $keystone_admin_password = $kickstack::params::keystone_admin_password,
   $cinder_backend = $kickstack::params::cinder_backend,
   $cinder_lvm_pv = $kickstack::params::cinder_lvm_pv,
   $cinder_lvm_vg = $kickstack::params::cinder_lvm_vg,

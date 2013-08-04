@@ -101,10 +101,6 @@ class kickstack::params {
   $keystone_admin_email = pick(getvar("::${variable_prefix}keystone_admin_email"),
                                "admin@${hostname}")
 
-  # The initial password to set for the admin user
-  $keystone_admin_password = pick(getvar("::${variable_prefix}keystone_admin_password"),
-                                  'kickstack')
-
   # The backend to use with Cinder. Supported: iscsi (default)
   $cinder_backend = pick(getvar("::${variable_prefix}cinder_backend"),
                          'iscsi')
