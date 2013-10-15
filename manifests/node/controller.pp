@@ -7,8 +7,8 @@ class kickstack::node::controller inherits kickstack {
   $cinder_keystone_password = getvar("${fact_prefix}cinder_keystone_password")
   $nova_sql_conn = getvar("${fact_prefix}nova_sql_connection")
   $nova_keystone_password = getvar("${fact_prefix}nova_keystone_password")
-  $quantum_sql_conn = getvar("${fact_prefix}quantum_sql_connection")
-  $quantum_keystone_password = getvar("${fact_prefix}quantum_keystone_password")
+  $neutron_sql_conn = getvar("${fact_prefix}neutron_sql_connection")
+  $neutron_keystone_password = getvar("${fact_prefix}neutron_keystone_password")
 
   case $::kickstack::rpc {
     'rabbitmq': {

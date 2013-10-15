@@ -3,7 +3,7 @@ class kickstack::node::api inherits kickstack {
   $keystone_internal_address = getvar("${fact_prefix}keystone_internal_address")
   $glance_sql_conn = getvar("${fact_prefix}glance_sql_connection")
   $cinder_sql_conn = getvar("${fact_prefix}cinder_sql_connection")
-  $quantum_sql_conn = getvar("${fact_prefix}quantum_sql_connection")
+  $neutron_sql_conn = getvar("${fact_prefix}neutron_sql_connection")
   $nova_sql_conn = getvar("${fact_prefix}nova_sql_connection")
   
 
@@ -27,9 +27,9 @@ class kickstack::node::api inherits kickstack {
   }
 
   if $keystone_internal_address and $amqp_host and $amqp_password {
-    include kickstack::quantum::server
-    if $quantum_sql_conn {
-      include kickstack::quantum::plugin
+    include kickstack::neutron::server
+    if $neutron_sql_conn {
+      include kickstack::neutron::plugin
     }
   }
 
@@ -37,11 +37,11 @@ class kickstack::node::api inherits kickstack {
     include kickstack::nova::api
 
     # This looks a bit silly, but is currently necessary: in order to configure nova-api
-    # as a Quantum client, we first need to install nova-api and quantum-server in one
-    # run, and then fix up Nova with the Quantum configuration in the next run.
-    $quantum_keystone_password = getvar("${::kickstack::fact_prefix}quantum_keystone_password")
-    if $quantum_keystone_password {
-      include kickstack::nova::quantumclient
+    # as a Neutron client, we first need to install nova-api and neutron-server in one
+    # run, and then fix up Nova with the Neutron configuration in the next run.
+    $neutron_keystone_password = getvar("${::kickstack::fact_prefix}neutron_keystone_password")
+    if $neutron_keystone_password {
+      include kickstack::nova::neutronclient
     }
   }
 }

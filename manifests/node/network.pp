@@ -1,6 +1,6 @@
 class kickstack::node::network inherits kickstack {
 
-  # Network nodes require a quantum Keystone endpoint.
+  # Network nodes require a neutron Keystone endpoint.
   # The L2 agents need an SQL connection.
   # The metadata agent also requires the shared secret set by Nova API.
 
@@ -18,18 +18,18 @@ class kickstack::node::network inherits kickstack {
     }
   }
 
-  $quantum_sql_conn = getvar("${::kickstack::fact_prefix}quantum_sql_connection")
-  $quantum_keystone_password = getvar("${::kickstack::fact_prefix}quantum_keystone_password")
-  $quantum_metadata_shared_secret = getvar("${::kickstack::fact_prefix}quantum_metadata_shared_secret")
+  $neutron_sql_conn = getvar("${::kickstack::fact_prefix}neutron_sql_connection")
+  $neutron_keystone_password = getvar("${::kickstack::fact_prefix}neutron_keystone_password")
+  $neutron_metadata_shared_secret = getvar("${::kickstack::fact_prefix}neutron_metadata_shared_secret")
 
-  if $amqp_host and $amqp_password and $quantum_keystone_password {
-    include kickstack::quantum::agent::dhcp
-    include kickstack::quantum::agent::l3
-    if $quantum_sql_conn {
-      include kickstack::quantum::agent::l2::network
+  if $amqp_host and $amqp_password and $neutron_keystone_password {
+    include kickstack::neutron::agent::dhcp
+    include kickstack::neutron::agent::l3
+    if $neutron_sql_conn {
+      include kickstack::neutron::agent::l2::network
     }
-    if $quantum_metadata_shared_secret {
-      include kickstack::quantum::agent::metadata
+    if $neutron_metadata_shared_secret {
+      include kickstack::neutron::agent::metadata
     }
   }
 }

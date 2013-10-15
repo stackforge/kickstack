@@ -22,7 +22,7 @@ Kickstack requires a couple of other modules currently not yet
 available on the Puppet Forge. You will have to fetch and install them
 from GitHub:
 
-* [`quantum`](https://github.com/stackforge/puppet-quantum), managing
+* [`neutron`](https://github.com/stackforge/puppet-neutron), managing
   OpenStack Networking,
 * [`vswitch`](https://github.com/CiscoSystems/puppet-vswitch),
   managing OpenVSwitch

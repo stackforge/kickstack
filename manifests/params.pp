@@ -131,57 +131,57 @@ class kickstack::params {
   $cinder_rbd_user = pick(getvar("::${variable_prefix}cinder_rbd_pool"),
                           'cinder')
 
-  # The network type to configure for Quantum.  See
+  # The network type to configure for Neutron.  See
   # http://docs.openstack.org/grizzly/openstack-network/admin/content/use_cases.html
   # Supported:
   # single-flat
   # provider-router
   # per-tenant-router (default)
-  $quantum_network_type = pick(getvar("::${variable_prefix}quantum_network_type"),
+  $neutron_network_type = pick(getvar("::${variable_prefix}neutron_network_type"),
                                'per-tenant-router')
 
-  # The plugin to use with Quantum.
+  # The plugin to use with Neutron.
   # Supported:
   # linuxbridge
   # ovs (default)
-  $quantum_plugin = pick(getvar("::${variable_prefix}quantum_plugin"),
+  $neutron_plugin = pick(getvar("::${variable_prefix}neutron_plugin"),
                                 'ovs')
 
-  # The tenant network type to use with the Quantum ovs and linuxbridge plugins
+  # The tenant network type to use with the Neutron ovs and linuxbridge plugins
   # Supported: gre (default), flat, vlan
-  $quantum_tenant_network_type = pick(getvar("::${variable_prefix}quantum_tenant_network_type"),
+  $neutron_tenant_network_type = pick(getvar("::${variable_prefix}neutron_tenant_network_type"),
                                       'gre')
 
-  # The Quantum physical network name to define (ignored if
+  # The Neutron physical network name to define (ignored if
   # tenant_network_type=='gre'
-  $quantum_physnet = pick(getvar("::${variable_prefix}quantum_physnet"),
+  $neutron_physnet = pick(getvar("::${variable_prefix}neutron_physnet"),
                           'physnet1')
 
-  # The network VLAN ranges to use with the Quantum ovs and
-  # linuxbridge plugins (ignored unless quantum_tenant_network_type ==
+  # The network VLAN ranges to use with the Neutron ovs and
+  # linuxbridge plugins (ignored unless neutron_tenant_network_type ==
   # 'vlan')
-  $quantum_network_vlan_ranges = pick(getvar("::${variable_prefix}quantum_network_vlan_ranges"),
+  $neutron_network_vlan_ranges = pick(getvar("::${variable_prefix}neutron_network_vlan_ranges"),
                                       '2000:3999')
 
-  # The tunnel ID ranges to use with the Quantum ovs plugin, when in gre mode
-  # (ignored unless quantum_tenant_network_type == 'gre')
-  $quantum_tunnel_id_ranges = pick(getvar("::${variable_prefix}quantum_tunnel_id_ranges"),
+  # The tunnel ID ranges to use with the Neutron ovs plugin, when in gre mode
+  # (ignored unless neutron_tenant_network_type == 'gre')
+  $neutron_tunnel_id_ranges = pick(getvar("::${variable_prefix}neutron_tunnel_id_ranges"),
                                    '1:1000')
 
-  # The Quantum integration bridge
+  # The Neutron integration bridge
   # Default: br-int (normally doesn't need to be changed)
-  $quantum_integration_bridge = pick(getvar("::${variable_prefix}quantum_integration_bridge"),
+  $neutron_integration_bridge = pick(getvar("::${variable_prefix}neutron_integration_bridge"),
                                      'br-int')
 
-  # The Quantum tunnel bridge (irrelevant unless
-  # $quantum_tenant_network_type=='gre')
+  # The Neutron tunnel bridge (irrelevant unless
+  # $neutron_tenant_network_type=='gre')
   # Default: br-tun (normally doesn't need to be changed)
-  $quantum_tunnel_bridge = pick(getvar("::${variable_prefix}quantum_tunnel_bridge"),
+  $neutron_tunnel_bridge = pick(getvar("::${variable_prefix}neutron_tunnel_bridge"),
                                        'br-tun')
 
-  # The Quantum external bridge
+  # The Neutron external bridge
   # Default: br-ex (normally doesn't need to be changed)
-  $quantum_external_bridge = pick(getvar("::${variable_prefix}quantum_external_bridge"),
+  $neutron_external_bridge = pick(getvar("::${variable_prefix}neutron_external_bridge"),
                                   'br-ex')
 
   # The interface over which to run your nodes' management network traffic.
@@ -202,13 +202,13 @@ class kickstack::params {
   $nic_external = pick(getvar("::${variable_prefix}nic_external"),
                        'eth2')
 
-  # The Quantum router uuid (irrelevant unless
-  # $quantum_network_type=='provider_router')
-  $quantum_router_id = getvar("::${variable_prefix}quantum_router_id")
+  # The Neutron router uuid (irrelevant unless
+  # $neutron_network_type=='provider_router')
+  $neutron_router_id = getvar("::${variable_prefix}neutron_router_id")
 
-  # The Quantum external network uuid (irrelevant unless
-  # $quantum_network_type=='provider_router')
-  $quantum_gateway_external_network_id = getvar("::${variable_prefix}gateway_external_network_id")
+  # The Neutron external network uuid (irrelevant unless
+  # $neutron_network_type=='provider_router')
+  $neutron_gateway_external_network_id = getvar("::${variable_prefix}gateway_external_network_id")
 
   # The nova-compute backend driver.
   # Supported: libvirt (default), xenserver

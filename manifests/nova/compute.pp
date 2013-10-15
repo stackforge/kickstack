@@ -3,8 +3,8 @@ class kickstack::nova::compute inherits kickstack {
   include kickstack::nova::config
 
   $keystone_internal_address = getvar("${fact_prefix}keystone_internal_address")
-  $quantum_admin_password = getvar("${fact_prefix}quantum_keystone_password")
-  $quantum_host = getvar("${fact_prefix}quantum_host")
+  $neutron_admin_password = getvar("${fact_prefix}neutron_keystone_password")
+  $neutron_host = getvar("${fact_prefix}neutron_host")
   $vncproxy_host = getvar("${fact_prefix}vncproxy_host")
   $vncserver_listen_address = getvar("ipaddress_${::kickstack::nic_management}")
 
