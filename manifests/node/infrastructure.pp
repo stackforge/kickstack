@@ -9,4 +9,8 @@ class kickstack::node::infrastructure inherits kickstack {
   include kickstack::neutron::db
   include kickstack::nova::db
 
+  if $::kickstack::heat_apis {
+    include kickstack::heat::db
+  }
+
 }
