@@ -14,7 +14,9 @@ class kickstack::neutron::agent::l2::network inherits kickstack {
           # The neutron module creates bridge_uplinks only when
           # bridge_mappings is non-empty. That's bogus for GRE
           # configurations, so create the uplink anyway.
-          ::neutron::plugins::ovs::port { "$bridge_uplinks": }
+          ::neutron::plugins::ovs::port { "$bridge_uplinks":
+            require => Class['kickstack::neutron::agent::l3'],
+          }
           class { 'neutron::agents::ovs':
             bridge_mappings    => [],
             bridge_uplinks     => [],
@@ -22,7 +24,7 @@ class kickstack::neutron::agent::l2::network inherits kickstack {
             enable_tunneling   => true,
             local_ip           => $local_tunnel_ip,
             tunnel_bridge      => $::kickstack::neutron_tunnel_bridge,
-            require            => Neutron::Plugins::Ovs::Port["$bridge_uplinks"]
+            require            => Neutron::Plugins::Ovs::Port["$bridge_uplinks"],
             package_ensure => $::kickstack::package_version,
           }
         }
