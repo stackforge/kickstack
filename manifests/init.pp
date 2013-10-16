@@ -61,6 +61,7 @@ class kickstack (
   $xenapi_connection_username = $kickstack::params::xenapi_connection_username,
   $xenapi_connection_password = $kickstack::params::xenapi_connection_password,
   $horizon_allow_any_hostname = $kickstack::params::horizon_allow_any_hostname,
+  $heat_apis = $kickstack::params::heat_apis,
 ) inherits kickstack::params {
 
   include ::exportfact

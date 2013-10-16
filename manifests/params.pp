@@ -245,4 +245,8 @@ class kickstack::params {
   # tunnel, etc.
   $horizon_allow_any_hostname = str2bool(pick(getvar("::${variable_prefix}horizon_allow_any_hostname"),'false'))
 
+  # Enabled Heat APIs (comma-separated list of exposed APIs)
+  # Can be any combination of 'heat', 'cfn', and 'cloudwatch'
+  # Default is just 'heat' (the native Heat API)
+  $heat_apis = pick(getvar("::${variable_prefix}heat_apis"),'heat')
 }
