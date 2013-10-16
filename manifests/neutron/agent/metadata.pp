@@ -17,7 +17,7 @@ class kickstack::neutron::agent::metadata inherits kickstack {
     auth_url          => "http://${keystone_internal_address}:35357/v2.0", 
     auth_region       => "$kickstack::keystone_region",
     metadata_ip       => $metadata_ip,
-    package_ensure => $::kickstack::package_ensure,
+    package_ensure => $::kickstack::package_version,
   }
 
 }

@@ -14,11 +14,19 @@ class kickstack::params {
   $fact_category = pick(getvar("::${variable_prefix}fact_category"),
                         'kickstack')
 
-  # Whether or not we want to keep OpenStack packages at the latest versions
-  # * default 'installed'
-  # * override by setting to 'latest'
-  # Does not apply to packages outside OpenStack.
-  $package_ensure = pick(getvar("::${variable_prefix}package_ensure"),
+  # Version number of OpenStack *server* packages.
+  #
+  # * default 'installed', meaning use whatever version is available
+  #   at the time of installation, and don't upgrade
+  # * set to 'latest' to use whichever is the latest version available
+  #   in the package repos, upgrading existing packages if necessary
+  # * set to a specific version number if you want to lock your system
+  #   to a particular build
+  #
+  # Note: if you set this to a specific version, then this assumes
+  # that your distro synchronizes version numbers across OpenStack
+  # server packages.
+  $package_version = pick(getvar("::${variable_prefix}package_version"),
                          'installed')
 
   # The OpenStack release to install

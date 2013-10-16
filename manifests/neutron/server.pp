@@ -11,7 +11,7 @@ class kickstack::neutron::server inherits kickstack {
     auth_user     => 'neutron',
     auth_password => $service_password,
     auth_host     => $keystone_internal_address,
-    package_ensure => $::kickstack::package_ensure,
+    package_ensure => $::kickstack::package_version,
   }
 
   kickstack::endpoint { 'neutron':

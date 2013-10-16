@@ -12,6 +12,6 @@ class kickstack::neutron::agent::dhcp inherits kickstack {
                           'per-tenant-router' => true,
                           default => false
                         },
-    package_ensure => $::kickstack::package_ensure,
+    package_ensure => $::kickstack::package_version,
   }
 } 

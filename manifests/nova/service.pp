@@ -6,6 +6,6 @@ define kickstack::nova::service {
   # Installs the Nova service
   class { "${classname}":
     enabled => true,
-    ensure_package => $::kickstack::package_ensure
+    ensure_package => $::kickstack::package_version
   }
 }

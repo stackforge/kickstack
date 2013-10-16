@@ -3,7 +3,7 @@ class kickstack::cinder::volume inherits kickstack {
   include kickstack::cinder::config
 
   class { '::cinder::volume':
-    package_ensure => $::kickstack::package_ensure,
+    package_ensure => $::kickstack::package_version,
   }
 
   case $::kickstack::cinder_backend {

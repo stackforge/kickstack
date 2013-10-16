@@ -16,7 +16,7 @@ class kickstack::neutron::agent::l2::compute inherits kickstack {
             enable_tunneling   => true,
             local_ip           => $local_tunnel_ip,
             tunnel_bridge      => $::kickstack::neutron_tunnel_bridge,
-            package_ensure => $::kickstack::package_ensure,
+            package_ensure => $::kickstack::package_version,
           }
         }
         default: {
@@ -27,7 +27,7 @@ class kickstack::neutron::agent::l2::compute inherits kickstack {
             integration_bridge => $::kickstack::neutron_integration_bridge,
             enable_tunneling   => false,
             local_ip           => '',
-            package_ensure => $::kickstack::package_ensure,
+            package_ensure => $::kickstack::package_version,
           }
         }
       }

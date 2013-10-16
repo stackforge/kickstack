@@ -20,7 +20,7 @@ class kickstack (
   $fact_filename = $kickstack::params::fact_filename,
   $fact_category = $kickstack::params::fact_category,
   $release = $kickstack::params::release,
-  $package_ensure = $kickstack::params::package_ensure,
+  $package_version = $kickstack::params::package_version,
   $name_resolution = $kickstack::params::name_resolution,
   $verbose       = $kickstack::params::verbose,
   $debug         = $kickstack::params::debug,
