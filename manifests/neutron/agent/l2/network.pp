@@ -23,6 +23,7 @@ class kickstack::neutron::agent::l2::network inherits kickstack {
             local_ip           => $local_tunnel_ip,
             tunnel_bridge      => $::kickstack::neutron_tunnel_bridge,
             require            => Neutron::Plugins::Ovs::Port["$bridge_uplinks"]
+            package_ensure => $::kickstack::package_ensure,
           }
         }
         default: {
@@ -36,13 +37,15 @@ class kickstack::neutron::agent::l2::network inherits kickstack {
             integration_bridge => $::kickstack::neutron_integration_bridge,
             enable_tunneling   => false,
             local_ip           => '',
+            package_ensure => $::kickstack::package_ensure,
           }
         }
       }
     }
     'linuxbridge': {
       class { "neutron::agents::linuxbridge":
-        physical_interface_mappings => "default:$nic_data"
+        physical_interface_mappings => "default:$nic_data",
+        package_ensure => $::kickstack::package_ensure,
       }
     }
   } 

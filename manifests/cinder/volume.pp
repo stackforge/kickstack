@@ -2,7 +2,9 @@ class kickstack::cinder::volume inherits kickstack {
 
   include kickstack::cinder::config
 
-  class { '::cinder::volume': }
+  class { '::cinder::volume':
+    package_ensure => $::kickstack::package_ensure,
+  }
 
   case $::kickstack::cinder_backend {
     'iscsi': {
