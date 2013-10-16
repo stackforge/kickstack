@@ -45,4 +45,8 @@ class kickstack::node::api inherits kickstack {
       include kickstack::nova::neutronclient
     }
   }
+
+  if $keystone_internal_address and $heat_sql_conn and $amqp_host and $amqp_password {
+    include kickstack::heat::api
+  }
 }
