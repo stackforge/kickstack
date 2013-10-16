@@ -19,6 +19,7 @@ class kickstack (
   $fact_prefix   = $kickstack::params::fact_prefix,
   $fact_filename = $kickstack::params::fact_filename,
   $fact_category = $kickstack::params::fact_category,
+  $release = $kickstack::params::release,
   $package_ensure = $kickstack::params::package_ensure,
   $name_resolution = $kickstack::params::name_resolution,
   $verbose       = $kickstack::params::verbose,
@@ -62,7 +63,7 @@ class kickstack (
 ) inherits kickstack::params {
 
   include ::exportfact
-  include openstack::repo
+  include kickstack::repo
   include kickstack::nameresolution
 
   ::exportfact::import { $fact_category: }

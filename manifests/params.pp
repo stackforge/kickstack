@@ -21,6 +21,14 @@ class kickstack::params {
   $package_ensure = pick(getvar("::${variable_prefix}package_ensure"),
                          'installed')
 
+  # The OpenStack release to install
+  # * default 'grizzly'
+  # * override by setting to 'folsom' (not recommended) or 'havana'
+  # This is for new installations only; don't expect this to magically
+  # support rolling releases.
+  $release = pick(getvar("::${variable_prefix}release"),
+                         'grizzly')
+
   # The strategy to use so machines can make their hostnames known to
   # each other.
   # * default "hosts" -- manage /etc/hosts
