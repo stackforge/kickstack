@@ -2,9 +2,7 @@ class kickstack::neutron::agent::l3 inherits kickstack {
 
   include kickstack::neutron::config
 
-  class { "vswitch::bridge":
-    name => 'br-ex'
-  } 
+  vs_bridge { 'br-ex': }
 
   class { "::neutron::agents::l3":
     debug            => $::kickstack::debug,
@@ -26,6 +24,6 @@ class kickstack::neutron::agent::l3 inherits kickstack {
                           default => undef
                         },
     package_ensure => $::kickstack::package_version,
-    require => Class['vswitch::bridge'],
+    require => Vs_bridge['br-ex'],
   }
 }
