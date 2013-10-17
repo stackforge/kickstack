@@ -15,6 +15,13 @@ class kickstack::heat::api inherits kickstack {
       service_password => $heat_admin_password,
       require => Class['::heat::api']
     }
+
+    kickstack::exportfact::export { 'heat_metadata_server':
+      value => $hostname,
+      tag => 'heat',
+      require => Class['::heat::api']
+    }
+
   }
 
   if 'cfn' in $apis {
@@ -36,6 +43,12 @@ class kickstack::heat::api inherits kickstack {
   if 'cloudwatch' in $apis {
     class { '::heat::api_cloudwatch':
       enabled => true,
+    }
+
+    kickstack::exportfact::export { 'heat_watch_server':
+      value => $hostname,
+      tag => 'heat',
+      require => Class['::heat::api_cloudwatch']
     }
 
     # The puppet-heat module has no facility for setting up the
