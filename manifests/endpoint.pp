@@ -1,13 +1,13 @@
-define kickstack::endpoint ( $service_password ) {
+define kickstack::endpoint ( $service_password, $classname='auth' ) {
 
   include pwgen
 
   $servicename = $name
   $factname = "${servicename}_keystone_password"
-  $classname = "${servicename}::keystone::auth"
+  $fullclassname = "${servicename}::keystone::${classname}"
 
   # Installs the service user endpoint.
-  class { $classname:
+  class { $fullclassname:
     password => $service_password,
     public_address => "${hostname}${::kickstack::keystone_public_suffix}",
     admin_address => "${hostname}${::kickstack::keystone_admin_suffix}",
@@ -19,7 +19,7 @@ define kickstack::endpoint ( $service_password ) {
   kickstack::exportfact::export { $factname:
     value => $service_password,
     tag => $servicename,
-    require => Class[$classname]
+    require => Class[$fullclassname]
   }
 
 }
