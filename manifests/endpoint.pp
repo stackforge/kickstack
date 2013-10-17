@@ -1,8 +1,7 @@
-define kickstack::endpoint ( $service_password, $classname='auth' ) {
+define kickstack::endpoint ( $service_password,
+                             $servicename = $name,
+                             $classname='auth' ) {
 
-  include pwgen
-
-  $servicename = $name
   $factname = "${servicename}_keystone_password"
   $fullclassname = "${servicename}::keystone::${classname}"
 
