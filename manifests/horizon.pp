@@ -25,7 +25,6 @@ class kickstack::horizon inherits kickstack {
     cache_server_ip       => '127.0.0.1',
     cache_server_port     => '11211',
     swift                 => false,
-    neutron               => true,
     keystone_host         => $keystone_host,
     keystone_default_role => 'Member',
     django_debug          => $django_debug,
