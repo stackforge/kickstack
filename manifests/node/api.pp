@@ -6,7 +6,7 @@ class kickstack::node::api inherits kickstack {
   $neutron_sql_conn = getvar("${fact_prefix}neutron_sql_connection")
   $nova_sql_conn = getvar("${fact_prefix}nova_sql_connection")
   $heat_sql_conn = getvar("${fact_prefix}heat_sql_connection")
-  
+  $ceilometer_sql_conn = getvar("${fact_prefix}ceilometer_sql_connection")
 
   case $::kickstack::rpc {
     'rabbitmq': {
@@ -48,5 +48,9 @@ class kickstack::node::api inherits kickstack {
 
   if $keystone_internal_address and $heat_sql_conn and $amqp_host and $amqp_password {
     include kickstack::heat::api
+  }
+
+  if $keystone_internal_address and $ceilometer_sql_conn and $amqp_host and $amqp_password {
+    include kickstack::ceilometer::api
   }
 }
