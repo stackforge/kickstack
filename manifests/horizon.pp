@@ -22,6 +22,10 @@ class kickstack::horizon inherits kickstack {
   class { '::horizon':
     require               => Package['memcached'],
     secret_key            => $new_secret_key,
+    fqdn                  => $::kickstack::horizon_allow_any_hostname ? {
+                               true => '*',
+                               default => pick($fqdn,$hostname)
+                             },
     cache_server_ip       => '127.0.0.1',
     cache_server_port     => '11211',
     swift                 => false,

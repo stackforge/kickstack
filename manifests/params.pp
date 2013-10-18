@@ -237,4 +237,12 @@ class kickstack::params {
 
   # The XenAPI password (ignored unless nova_compute_driver==xenserver)
   $xenapi_connection_password = getvar("::${variable_prefix}xenapi_connection_password")
+
+  # Allow access to Horizon using any host name?
+  # Default is false, meaning allow Horizon access only through the
+  # FQDN of the dashboard host.
+  # Set to true if you want to access by IP address, through an SSH
+  # tunnel, etc.
+  $horizon_allow_any_hostname = str2bool(pick(getvar("::${variable_prefix}horizon_allow_any_hostname"),'false'))
+
 }

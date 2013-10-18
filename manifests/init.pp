@@ -59,7 +59,8 @@ class kickstack (
   $nova_compute_libvirt_type = $kickstack::params::nova_compute_libvirt_type,
   $xenapi_connection_url = $kickstack::params::xenapi_connection_url,
   $xenapi_connection_username = $kickstack::params::xenapi_connection_username,
-  $xenapi_connection_password = $kickstack::params::xenapi_connection_password
+  $xenapi_connection_password = $kickstack::params::xenapi_connection_password,
+  $horizon_allow_any_hostname = $kickstack::params::horizon_allow_any_hostname,
 ) inherits kickstack::params {
 
   include ::exportfact
