@@ -13,4 +13,5 @@ class kickstack::node::infrastructure inherits kickstack {
     include kickstack::heat::db
   }
 
+  include kickstack::ceilometer::db
 }
