@@ -4,4 +4,5 @@ class kickstack::node::client inherits kickstack {
   include ::cinder::client
   include ::neutron::client
   include ::heat::client
+  include ::ceilometer::client
 }
