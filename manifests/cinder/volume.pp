@@ -19,7 +19,7 @@ class kickstack::cinder::volume inherits kickstack {
         require => Physical_volume["$pv"]
       }
       class { '::cinder::volume::iscsi': 
-        iscsi_ip_address => '0.0.0.0',
+        iscsi_ip_address => getvar("ipaddress_${nic_management}"),
         require => Volume_group["$vg"]
       }
     }
