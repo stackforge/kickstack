@@ -2,7 +2,16 @@ class kickstack::neutron::agent::l3 inherits kickstack {
 
   include kickstack::neutron::config
 
-  vs_bridge { 'br-ex': }
+  $external_bridge = $::kickstack::neutron_external_bridge
+
+  vs_bridge { $external_bridge:
+    ensure => present,
+  }
+
+  vs_port { $::kickstack::nic_external:
+    ensure => present,
+    bridge => $external_bridge,
+  }
 
   class { "::neutron::agents::l3":
     debug            => $::kickstack::debug,
@@ -24,6 +33,6 @@ class kickstack::neutron::agent::l3 inherits kickstack {
                           default => undef
                         },
     package_ensure => $::kickstack::package_version,
-    require => Vs_bridge['br-ex'],
+    require => Vs_bridge[$external_bridge],
   }
 }
