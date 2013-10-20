@@ -12,7 +12,7 @@ class kickstack::nova::vncproxy inherits kickstack {
     kickstack::exportfact::export { "vncproxy_host":
       value => "${hostname}",
       tag => "nova",
-      require => Kickstack::Nova::Service["vncproxy"]
+      require => Class['::nova::vncproxy']
     }
   }
 }
