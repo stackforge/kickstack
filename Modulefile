@@ -1,5 +1,5 @@
 name    'hastexo/kickstack'
-version '0.1.0'
+version '0.2.0'
 source  'https://github.com/hastexo/kickstack'
 author  'Florian Haas,Syed Armani,Andreas Kurz,Martin Loschwitz'
 license 'Apache License 2.0'
