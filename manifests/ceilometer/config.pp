@@ -27,7 +27,7 @@ class kickstack::ceilometer::config inherits kickstack {
         rpc_backend     => 'ceilometer.openstack.common.rpc.impl_kombu',
         rabbit_host     => $rabbit_host,
         rabbit_password => $rabbit_password,
-        rabbit_virtualhost => $::kickstack::rabbit_virtual_host,
+        rabbit_virtual_host => $::kickstack::rabbit_virtual_host,
         rabbit_userid   => $::kickstack::rabbit_userid,
         verbose         => $::kickstack::verbose,
         debug           => $::kickstack::debug,
