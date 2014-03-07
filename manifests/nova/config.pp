@@ -18,7 +18,8 @@ class kickstack::nova::config inherits kickstack {
         auth_strategy   => 'keystone',
         verbose         => $::kickstack::verbose,
         debug           => $::kickstack::debug,
-        glance_api_servers => "${glance_api_servers}:9292"
+        glance_api_servers => "${glance_api_servers}:9292",
+#       install_utilities => false
       }
     }
     'qpid': {
@@ -35,7 +36,8 @@ class kickstack::nova::config inherits kickstack {
         auth_strategy   => 'keystone',
         verbose         => $::kickstack::verbose,
         debug           => $::kickstack::debug,
-        glance_api_servers => "${glance_api_servers}:9292"
+        glance_api_servers => "${glance_api_servers}:9292",
+#       install_utilities => false
       }
     }
   } 
