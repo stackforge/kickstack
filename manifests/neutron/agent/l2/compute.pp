@@ -16,6 +16,7 @@ class kickstack::neutron::agent::l2::compute inherits kickstack {
             enable_tunneling   => true,
             local_ip           => $local_tunnel_ip,
             tunnel_bridge      => $::kickstack::neutron_tunnel_bridge,
+            tunnel_types       => ['gre'],
             package_ensure => $::kickstack::package_version,
           }
         }
