@@ -30,12 +30,13 @@ class kickstack::params {
                          'installed')
 
   # The OpenStack release to install
-  # * default 'grizzly'
-  # * override by setting to 'folsom' (not recommended) or 'havana'
+  # * default 'havana'
+  # * override by using a different OpenStack release name
+  #   (all lowercase)
   # This is for new installations only; don't expect this to magically
   # support rolling releases.
   $release = pick(getvar("::${variable_prefix}release"),
-                         'grizzly')
+                         'havana')
 
   # The strategy to use so machines can make their hostnames known to
   # each other.
