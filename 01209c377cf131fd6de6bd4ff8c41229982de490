@@ -1,0 +1,8 @@
+Verified+2: Jenkins
+Approved+1: Florian Haas <florian@hastexo.com>
+Code-Review+2: Florian Haas <florian@hastexo.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 10 Mar 2014 13:10:46 +0000
+Reviewed-on: https://review.openstack.org/79149
+Project: stackforge/kickstack
+Branch: refs/heads/master
