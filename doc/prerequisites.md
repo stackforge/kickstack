@@ -17,21 +17,11 @@ to the master and able to run `puppet agent`.
 
 ## Puppet modules
 
-Besides the dependencies listed in the [Modulefile](../Modulefile),
-Kickstack requires a couple of other modules currently not yet
-available on the Puppet Forge. You will have to fetch and install them
-from GitHub:
+All of Kickstack's dependencies are available as published modules on
+the Puppet Forge. You can install Kickstack, along with all of its
+dependencies, with one simple command:
 
-* [`neutron`](https://github.com/stackforge/puppet-neutron), managing
-  OpenStack Networking,
-* [`vswitch`](https://github.com/CiscoSystems/puppet-vswitch),
-  managing OpenVSwitch
-
-In addition, the `glance` module, as available in its 2.0.0 version
-from the Puppet Forge, was unfortunately released with a bug that
-renders it unsuitable for use with Ubuntu. Until a new version of that
-module is released, you will also have to fetch the `glance` module
-from [GitHub](https://github.com/stackforge/puppet-glance).
+    puppet module install hastexo-kickstack
 
 ## Networking prerequisites
 
