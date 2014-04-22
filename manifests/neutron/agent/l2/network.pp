@@ -7,6 +7,11 @@ class kickstack::neutron::agent::l2::network inherits kickstack {
 
   case "$::kickstack::neutron_plugin" {
     'ovs': {
+      file { 'l2-agent-config':
+        path => '/etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini',
+        content => template("kickstack/l2-agent-config.erb"),
+        replace => false,
+      }
       case $tenant_network_type {
         'gre': {
           $local_tunnel_ip = getvar("ipaddress_${nic_data}")
@@ -36,6 +41,14 @@ class kickstack::neutron::agent::l2::network inherits kickstack {
             enable_tunneling   => false,
             local_ip           => '',
             package_ensure => $::kickstack::package_version,
+          }
+        }
+      }
+      case $::osfamily {
+        'Debian': {
+          file { 'neutron-l2-agent-init-file':
+            path => '/etc/init/neutron-plugin-openvswitch-agent.conf',
+            content => template("kickstack/init.neutron-plugin-openvswitch-agent.erb"),
           }
         }
       }
