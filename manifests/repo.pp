@@ -1,5 +1,5 @@
 class kickstack::repo inherits kickstack {
-  class { '::openstack::repo':
+  class { '::openstack::resources::repo':
     release => $::kickstack::release
   }
 }

@@ -32,6 +32,12 @@ class kickstack::nova::api inherits kickstack {
     require           => Class['::nova::api']
   }
 
+  kickstack::exportfact::export { "nova_api_address":
+    value => "${hostname}",
+    tag => "nova",
+    require => Class['::nova::api']
+  }
+
   # Export the metadata API IP address and shared secret, to be picked up
   # by the Neutron metadata proxy agent on the network node
   kickstack::exportfact::export { "nova_metadata_ip":
@@ -39,6 +45,7 @@ class kickstack::nova::api inherits kickstack {
     tag => "nova",
     require => Class['::nova::api']
   }
+
   kickstack::exportfact::export { "neutron_metadata_shared_secret":
     value => $neutron_secret,
     tag => 'nova',
