@@ -9,5 +9,5 @@ project_page 'https://github.com/hastexo/kickstack'
 
 dependency 'hastexo/exportfact', '>= 0.1.1'
 dependency 'puppetlabs/lvm', '>= 0.1.2'
-dependency 'puppetlabs/openstack', '>= 3.0.0'
+dependency 'puppetlabs/openstack', '>= 4.0.0'
 dependency 'rgevaert/pwgen', '>= 0.0.1'

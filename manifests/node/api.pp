@@ -40,9 +40,16 @@ class kickstack::node::api inherits kickstack {
     # This looks a bit silly, but is currently necessary: in order to configure nova-api
     # as a Neutron client, we first need to install nova-api and neutron-server in one
     # run, and then fix up Nova with the Neutron configuration in the next run.
+    #
+    # The same applies to Neutron with regards to Nova notifications, but the other way
+    # around.
     $neutron_keystone_password = getvar("${::kickstack::fact_prefix}neutron_keystone_password")
+    $nova_keystone_password = getvar("${::kickstack::fact_prefix}nova_keystone_password")
     if $neutron_keystone_password {
       include kickstack::nova::neutronclient
+    }
+    if $nova_keystone_password {
+      include kickstack::neutron::server::notifications
     }
   }
 
