@@ -1,3 +1,23 @@
+# Important
+
+Kickstack is now **retired**. It was originally conceived as a
+simplified method of deploying OpenStack with a higher-level Puppet
+abstraction than the then-available vendor deployment facilities
+provided. During the OpenStack Icehouse and Juno releases, all major
+OpenStack vendors released deployment facilities that render Kickstack
+obsolete, and that is a good thing.
+
+Some alternatives that you may want to try (note: this list was
+written at the time of the OpenStack Juno release, and will not be
+updated):
+
+- Puppet based: Packstack/Quickstack (RDO), Staypuft (RHEL OSP), Fuel
+  (Mirantis OpenStack)
+- Non Puppet based: Juju (Ubuntu), Crowbar (SUSE Cloud)
+
+This repository is kept around for reference purposes only.
+
+
 # Kickstack: Kickstart your OpenStack
 
 Kickstack is a
